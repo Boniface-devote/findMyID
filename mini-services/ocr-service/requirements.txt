@@ -1,0 +1,7 @@
+rapidocr-onnxruntime
+onnxruntime
+opencv-python-headless
+fastapi
+uvicorn
+python-multipart
+numpy
