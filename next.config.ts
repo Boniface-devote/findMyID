@@ -7,6 +7,12 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   reactStrictMode: false,
+  // Disable Turbopack for production builds due to PostCSS compatibility
+  experimental: {
+    turbo: {
+      enabled: false,
+    },
+  },
 };
 
 export default nextConfig;
