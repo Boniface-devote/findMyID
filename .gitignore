@@ -63,3 +63,5 @@ coverage/
 
 # Downloaded images (if any)
 download/
+
+.vercel
