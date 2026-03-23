@@ -1,27 +1,5 @@
 services:
-  # Next.js Frontend
-  - type: web
-    name: findmyid-app
-    env: node
-    plan: free
-    buildCommand: npm install && npm run build
-    startCommand: npm run start
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: OCR_SERVICE_URL
-        fromService:
-          name: findmyid-ocr
-          type: web
-          property: url
-      - key: NEXT_PUBLIC_SUPABASE_URL
-        sync: false
-      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
-        sync: false
-      - key: SUPABASE_SERVICE_ROLE_KEY
-        sync: false
-
-  # Python OCR Service
+  # Python OCR Service (must be first so the URL is available)
   - type: web
     name: findmyid-ocr
     env: python
@@ -32,3 +10,22 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
+
+  # Next.js Frontend
+  - type: web
+    name: findmyid-app
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: node .next/standalone/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OCR_SERVICE_URL
+        value: https://findmyid-ocr.onrender.com
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
