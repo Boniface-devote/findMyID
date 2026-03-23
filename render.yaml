@@ -5,8 +5,8 @@ services:
     env: python
     plan: free
     region: oregon
-    buildCommand: pip install -r requirements.txt
-    startCommand: python main.py
+    buildCommand: pip install -r mini-services/ocr-service/requirements.txt
+    startCommand: cd mini-services/ocr-service && python main.py
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
